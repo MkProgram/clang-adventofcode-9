@@ -17,4 +17,5 @@ typedef struct {
   long long part1;
 } PuzzleSolution;
 
+PointSquare calculate_rect(Point point_a, Point point_b);
 PuzzleSolution find_largest_square(FILE *file);

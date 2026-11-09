@@ -1,6 +1,7 @@
 #include "find_square.h"
 #include "vec.h"
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,6 +15,8 @@ PointSquare calculate_rect(Point point_a, Point point_b) {
   if (height < 0) {
     height = -height;
   }
+  width += 1;
+  height += 1;
 
   long long area = width * height;
 
@@ -48,15 +51,15 @@ size_t create_points(FILE *file, Vec *out) {
   char *line = NULL;
   size_t count = 0;
 
-  while (getline(&line, &linecap, file) == -1) {
-    size_t x = 0;
-    size_t y = 0;
+  while (getline(&line, &linecap, file) != -1) {
+    int x = 0;
+    int y = 0;
 
-    if (sscanf(line, "%zu - %zu", &x, &y) != 2) {
+    if (sscanf(line, "%d,%d", &x, &y) != 2) {
       fprintf(stderr, "Cannot extract points data");
       continue;
     }
-    vec_push(out, &(Point){x, y});
+    vec_push(out, &(Point){(size_t)x, (size_t)y});
     ++count;
   }
 
@@ -72,6 +75,9 @@ PuzzleSolution find_largest_square(FILE *file) {
 
   vec_init(&points, sizeof(Point));
   create_points(file, &points);
+  if (!largest_rectangle_area(&points, &solution)) {
+    fprintf(stderr, "No rectangle could be found\n");
+  }
 
   vec_free(&points);
   return solution;
