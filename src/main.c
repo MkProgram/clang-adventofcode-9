@@ -12,7 +12,11 @@ int main(void) {
     return EXIT_FAILURE;
   }
   PuzzleSolution solution = find_largest_square(file);
-  printf("Solution of part 1: %lld", solution.part1);
+  printf("Solution of part 1: %lld\n", solution.part1);
+
+  if (solution.part2_found) {
+    printf("Solution for part 2: %lld\n", solution.part2);
+  }
 
   return EXIT_SUCCESS;
 }

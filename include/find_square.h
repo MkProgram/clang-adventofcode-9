@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 
@@ -15,6 +16,8 @@ typedef struct {
 typedef struct {
   PointSquare square;
   long long part1;
+  bool part2_found;
+  long long part2;
 } PuzzleSolution;
 
 PointSquare calculate_rect(Point point_a, Point point_b);

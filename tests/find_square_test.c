@@ -36,6 +36,7 @@ size_t test_calculate_rect(void) {
 
 size_t test_find_example(void) {
   long long expected_solution = 50;
+  long long expected_solution_part2 = 24;
   char *floc = "tests/example.txt";
   FILE *file = NULL;
   file = fopen(floc, "r");
@@ -49,6 +50,17 @@ size_t test_find_example(void) {
             expected_solution, solution.part1);
     return 1;
   }
+  if (!solution.part2_found) {
+    fprintf(stderr, "FAILURE: Expected to find solution for part2\n");
+    return 1;
+  }
+  if (solution.part2 != expected_solution_part2) {
+    fprintf(stderr,
+            "FAILURE: Expected solution for part2 to be %lld, got %lld\n",
+            expected_solution_part2, solution.part2);
+    return 1;
+  }
+
   return 0;
 }
 
